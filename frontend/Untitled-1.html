@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoteSwitch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .video-container {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RemoteSwitch</h1>
+        <hr>
+        <div class="video-container">
+            <video id="video" controls autoplay style="width: 100%;"></video>
+        </div>
+        <p id="left-joystick">Left joystick position: {x: 0, y: 0}</p>
+        <p id="right-joystick">Right joystick position: {x: 0, y: 0}</p>
+        <p id="bumpers">Bumpers: {x: 0, y: 0}</p>
+        <p id="capture-button">Capture button: Not pressed</p>
+    </div>
+    <script>
+        let keysPressed = {};
+        let leftJoystick = {x: 0, y: 0};
+        let rightJoystick = {x: 0, y: 0};
+        let captureButton = false;
+        let bumpers = {x: 0, y: 0};
+
+        document.addEventListener('keydown', function(event) {
+            keysPressed[event.key] = true;
+            updatePosition();
+            console.log('Keys pressed:', keysPressed);
+        });
+
+        document.addEventListener('keyup', function(event) {
+            delete keysPressed[event.key];
+            updatePosition();
+            console.log('Keys pressed:', keysPressed);
+        });
+
+        function updatePosition() {
+            // Update left joystick (WASD)
+            leftJoystick = {x: 0, y: 0};
+            if (keysPressed['w']) {
+                leftJoystick.y = 1;
+            }
+            if (keysPressed['a']) {
+                leftJoystick.x = -1;
+            }
+            if (keysPressed['s']) {
+                leftJoystick.y = -1;
+            }
+            if (keysPressed['d']) {
+                leftJoystick.x = 1;
+            }
+
+            // Update bumpers (Q and E)
+            bumpers = {x: 0, y: 0};
+            if (keysPressed['q']) {
+                bumpers.x = 1;
+            }
+            if (keysPressed['e']) {
+                bumpers.y = 1;
+            }
+
+            // Update right joystick (Arrow keys)
+            rightJoystick = {x: 0, y: 0};
+            if (keysPressed['ArrowUp']) {
+                rightJoystick.y = 1;
+            }
+            if (keysPressed['ArrowLeft']) {
+                rightJoystick.x = -1;
+            }
+            if (keysPressed['ArrowDown']) {
+                rightJoystick.y = -1;
+            }
+            if (keysPressed['ArrowRight']) {
+                rightJoystick.x = 1;
+            }
+
+            // Update capture button (C)
+            captureButton = keysPressed['c'] ? true : false;
+
+            document.getElementById('left-joystick').textContent = `Left joystick position: {x: ${leftJoystick.x}, y: ${leftJoystick.y}}`;
+            document.getElementById('right-joystick').textContent = `Right joystick position: {x: ${rightJoystick.x}, y: ${rightJoystick.y}}`;
+            document.getElementById('bumpers').textContent = `Bumpers: {x: ${bumpers.x}, y: ${bumpers.y}}`;
+            document.getElementById('capture-button').textContent = `Capture button: ${captureButton ? 'Pressed' : 'Not pressed'}`;
+            window.parent.postMessage({type: 'update_position', leftJoystick: leftJoystick, rightJoystick: rightJoystick, bumpers: bumpers, captureButton: captureButton}, '*');
+        }
+    </script>
+</body>
+</html>
