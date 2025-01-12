@@ -1,3 +1,0 @@
-bitarray==2.9.3
-bitstring==4.1.4
-pyrtmp==0.3.1
