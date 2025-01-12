@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RemoteSwitch - Deltahacks 2025!</title>
+        <script type="module" defer>
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: true,
+                audio: false
+            });
+            
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            
+            stream.getVideoTracks()[0].onended = () => {
+                video.srcObject = null;
+            };
+
+            addEventListener("keypress", (event) => {
+                fetch(`http://127.0.0.1:5000/button-press?button-type=${event.key}-pressed`)
+            })
+
+            addEventListener("keyup", (event) => {
+                fetch(`http://127.0.0.1:5000/button-press?button-type=${event.key}-released`)
+            })
+        </script>
+    </head>
+    <body>
+        <video id="video" autoplay></video>
+    </body>
+</html>
