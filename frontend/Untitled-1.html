@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RemoteSwitch</title>
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,16 +25,13 @@
         <h1>RemoteSwitch</h1>
         <hr>
         <div class="video-container">
-            <video id="video" class="video-js vjs-default-skin" controls autoplay style="width: 100%;">
-                <source src="rtmp://172.18.78.220/live" type="rtmp/flv">
-            </video>
+            <video id="video" controls autoplay style="width: 100%;"></video>
         </div>
         <p id="left-joystick">Left joystick position: {x: 0, y: 0}</p>
         <p id="right-joystick">Right joystick position: {x: 0, y: 0}</p>
         <p id="bumpers">Bumpers: {x: 0, y: 0}</p>
         <p id="capture-button">Capture button: Not pressed</p>
     </div>
-    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
     <script>
         let keysPressed = {};
         let leftJoystick = {x: 0, y: 0};
