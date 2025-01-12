@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RemoteSwitch</title>
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
-    <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .video-container {
-            width: 100%;
-            height: auto;
-        }
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RemoteSwitch</title>
+        <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+        <script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .video-container {
+                width: 100%;
+                height: auto;
+            }
+            h1 {
+                font-family: 'Trebuchet MS', sans-serif;
+                font-size: 3rem;
+                font-weight: bold;
+                text-align: center;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            #start-cast {
+                background: linear-gradient(135deg, #4caf50, #2c8f33);
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                padding: 12px 24px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background 0.3s ease, transform 0.2s ease;
+                font-weight: bold;
+            }
+            #start-cast:hover {
+                background: linear-gradient(135deg, #45a049, #268f33);
+                transform: scale(1.05);
+            }
+            #start-cast:active {
+                background: linear-gradient(135deg, #388e3c, #1b7231);
+            }
+        </style>
+    </head>
 <body>
     <div class="container">
         <h1>RemoteSwitch</h1>
