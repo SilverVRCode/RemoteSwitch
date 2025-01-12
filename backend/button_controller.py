@@ -4,5 +4,5 @@ app = Flask(__name__)
 
 @app.route("/button-press")
 def button_press():
-    print(request.args.get("button-type"), request.args.get("direction"))
+    print(request.args.get("button-type"))
     return "yippee"
