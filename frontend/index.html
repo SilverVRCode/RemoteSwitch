@@ -16,11 +16,11 @@
             };
 
             addEventListener("keypress", (event) => {
-                fetch(`http://127.0.0.1:5000/button-press?button-type=${event.key}-pressed`)
+                fetch(`http://172.18.78.220:5000/button-press?button-type=${event.key}-pressed`)
             })
 
             addEventListener("keyup", (event) => {
-                fetch(`http://127.0.0.1:5000/button-press?button-type=${event.key}-released`)
+                fetch(`http://172.18.78.220:5000/button-press?button-type=${event.key}-released`)
             })
         </script>
     </head>
