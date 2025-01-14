@@ -38,6 +38,7 @@ rpds-py==0.22.3
 six==1.17.0
 smmap==5.0.2
 streamlit==1.41.1
+streamlit_webrtc==0.47.9
 tenacity==9.0.0
 toml==0.10.2
 tornado==6.4.2
