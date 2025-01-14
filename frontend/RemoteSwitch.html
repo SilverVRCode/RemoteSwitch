@@ -10,7 +10,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
         <script>
-        var setVanta = ()=>{
+        var setVanta = () => {
             if (window.VANTA) window.VANTA.FOG({
                 el: ".s-page-1 .s-section-1 .s-section",
                 mouseControls: true,
@@ -22,26 +22,44 @@
         }
         _strk.push(function() {
             setVanta()
-            window.edit_page.Event.subscribe( "Page.beforeNewOneFadeIn", setVanta )
+            window.edit_page.Event.subscribe("Page.beforeNewOneFadeIn", setVanta)
         })
         </script>
-        </script>
         <style>
-
-            
-
             body {
                 font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                color: #333;
+                margin: 0;
+                padding: 0;
             }
             .container {
                 width: 100%;
                 max-width: 800px;
                 margin: 0 auto;
                 padding: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                margin-top: 20px;
             }
             .video-container {
-                width: 100%;
+                width: 25%;
+                min-width: 200px;
                 height: auto;
+                margin-bottom: 20px;
+                position: relative;
+            }
+            .fullscreen-button {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 5px;
             }
             h1 {
                 font-family: 'Trebuchet MS', sans-serif;
@@ -61,6 +79,8 @@
                 cursor: pointer;
                 transition: background 0.3s ease, transform 0.2s ease;
                 font-weight: bold;
+                display: block;
+                margin: 0 auto 20px auto;
             }
             #start-cast:hover {
                 background: linear-gradient(135deg, #45a049, #268f33);
@@ -71,9 +91,13 @@
             }
             .logo {
                 width: 100%;
-                max-width: 150px;  /* Adjust the max-width as needed */
-                margin: 0 auto 20px auto;  /* Center the image and add space below */
+                max-width: 150px;
+                margin: 0 auto 20px auto;
                 display: block;
+            }
+            p {
+                font-size: 1rem;
+                margin: 10px 0;
             }
         </style>
     </head>
@@ -84,6 +108,7 @@
         <hr>
         <div class="video-container">
             <video id="video" class="video-js vjs-default-skin" autoplay style="width: 100%;"></video>
+            <button class="fullscreen-button" id="fullscreen-button">Fullscreen</button>
         </div>
         <button id="start-cast">Start Casting</button>
         <p id="left-joystick">Left joystick position: {x: 0, y: 0}</p>
@@ -94,6 +119,7 @@
     <script type="module">
         const video = document.getElementById('video');
         const startCastButton = document.getElementById('start-cast');
+        const fullscreenButton = document.getElementById('fullscreen-button');
         let keysPressed = {};
         let leftJoystick = {x: 0, y: 0};
         let rightJoystick = {x: 0, y: 0};
@@ -118,6 +144,17 @@
             } catch (error) {
                 console.error('Error accessing display media:', error);
                 alert('Failed to start screen casting.');
+            }
+        });
+
+        // Function to toggle fullscreen
+        fullscreenButton.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                video.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
             }
         });
 
